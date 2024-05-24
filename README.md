@@ -27,14 +27,46 @@ interface BonusService : RPC {
 data class Order(val user: String, val coffeeId: Int)
 ```
 
-Communication Model(almost alike RSocket):
+kotlinx.rpc communication model is almost alike RSocket, and you can take a look at [RSocket Kotlin](https://github.com/rsocket/rsocket-kotlin).
+
+```kotlin
+public interface RSocket : CoroutineScope {
+
+    public suspend fun metadataPush(metadata: ByteReadPacket) {
+        metadata.close()
+        notImplemented("Metadata Push")
+    }
+
+    public suspend fun fireAndForget(payload: Payload) {
+        payload.close()
+        notImplemented("Fire and Forget")
+    }
+
+    public suspend fun requestResponse(payload: Payload): Payload {
+        payload.close()
+        notImplemented("Request Response")
+    }
+
+    public fun requestStream(payload: Payload): Flow<Payload> {
+        payload.close()
+        notImplemented("Request Stream")
+    }
+
+    public fun requestChannel(initPayload: Payload, payloads: Flow<Payload>): Flow<Payload> {
+        initPayload.close()
+        notImplemented("Request Channel")
+    }
+}
+```
+
+kotlinx.rpc Communication Model(almost alike RSocket):
 
 * Request Response: `suspend fun call(param: String): String`
 * Fire and Forget: `suspend fun sendNotification(event: String)`
 * Request Stream: support by Kotlin Coroutines Flow
 * Request Channel: support by Kotlin Coroutines Flow
 
-Flow support: `Flow`, `SharedFlow`, and `StateFlow`
+Flow support: `Flow`, `SharedFlow`, and `StateFlow`.
 
 # References
 
@@ -43,3 +75,4 @@ Flow support: `Flow`, `SharedFlow`, and `StateFlow`
 * kotlinx.coroutines: https://github.com/Kotlin/kotlinx.coroutines
 * Ktor: https://ktor.io/
 * kotlinx.serialization: https://github.com/Kotlin/kotlinx.serialization
+* rsocket-kotlin: https://github.com/rsocket/rsocket-kotlin
