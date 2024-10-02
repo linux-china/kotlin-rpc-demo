@@ -1,13 +1,13 @@
 package org.mvnsearch
 
-import io.ktor.client.HttpClient
-import io.ktor.client.request.url
+import io.ktor.client.*
+import io.ktor.client.request.*
 import kotlinx.coroutines.runBlocking
-import kotlinx.rpc.client.withService
-import kotlinx.rpc.serialization.json
-import kotlinx.rpc.transport.ktor.client.installRPC
-import kotlinx.rpc.transport.ktor.client.rpc
-import kotlinx.rpc.transport.ktor.client.rpcConfig
+import kotlinx.rpc.krpc.ktor.client.installRPC
+import kotlinx.rpc.krpc.ktor.client.rpc
+import kotlinx.rpc.krpc.ktor.client.rpcConfig
+import kotlinx.rpc.krpc.serialization.json.json
+import kotlinx.rpc.withService
 
 fun main() = runBlocking {
 
