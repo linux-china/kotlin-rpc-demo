@@ -2,11 +2,13 @@ package org.mvnsearch
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.rpc.RPC
+import kotlinx.rpc.RemoteService
+import kotlinx.rpc.annotations.Rpc
 import kotlinx.serialization.Serializable
 import kotlin.coroutines.CoroutineContext
 
-interface MyService : RPC {
+@Rpc
+interface MyService: RemoteService {
     suspend fun hello(name: String): String
 }
 
@@ -16,7 +18,7 @@ class MyServiceImpl(override val coroutineContext: CoroutineContext) : MyService
     }
 }
 
-interface BonusService : RPC {
+interface BonusService {
     val liveBonuses: Flow<Int>
     val total: StateFlow<Int>
     suspend fun calculateBonuses(order: Order): Int
